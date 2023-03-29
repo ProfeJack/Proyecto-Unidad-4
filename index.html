@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Demo</title>
+
+    <!-- BOOSTRAP CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <!-- Toastify CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="./main.css">
+
+
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+
+
+
+</head>
+<body>
+    <!-- Navbar -->
+
+    <!--CAMBIAR EL COLOR DE LA BARRA DE NAVEGACIÓN  danger warning success primary secondary-->
+  
+  
+  
+  
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">PetFriendly</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">    
+
+          <!--CAMBIAR EL IDIOMA DE LOS BOTONES-->
+
+
+
+          <a class="nav-link logged-out" href="#" data-bs-toggle="modal" data-bs-target="#signinModal">Signin</a>
+          <a class="nav-link logged-out" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</a>
+          <a class="nav-link logged-in" href="#" id="logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<!-- CRUD -->
+<!-- ADD TASK -->
+<div class="container p-4">
+  <div class="row">
+    <div class=" col-5  col-md-6 offset-md-3">
+      <div class="card" id="ventana">
+        <div class="card-body">
+          <h1 class="h4" id="titulo">Agregar tarea o nota</h1>
+          <form id="task-form">
+            <label for="title">Titulo:</label>
+            <input
+              type="text"
+              id="task-title"
+              class="form-control mb-3"
+              class="My First Title"
+              placeholder="Task Title"
+              autofocus>
+            <label for="description">Descripcion:</label>
+            <textarea
+              id="task-description"
+              rows="3"
+              class="form-control mb-3"
+              placeholder="Escribir tarea o nota aqui"
+            ></textarea>
+            <button class="btn btn-primary" id="btn-task-form">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  fin de CRUD -->
+
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <ul class="list-group" id="tasks-container">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>SignUp</h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-5">
+          <form id="signup-form">
+
+            <label for="email">Email:</label>
+            <input type="text" id="signup-email" class="form-control mb-3" placeholder="Correo" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="signup-password" class="form-control mb-3" placeholder="Password" required>
+
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignin"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>SignIn</h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="login-form">
+            <label for="email">Email</label>
+            <input type="text" id="login-email" class="form-control mb-3" placeholder="Correo" required>
+            <label for="password">Password:</label>
+            <input type="password" id="login-password" class="form-control mb-3" placeholder="Password" required>
+
+            <button type="submit" class="btn btn-success w-100 mb-4">Login</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!--Plantilla del carrusel-->
+<!--CONTENIDO-->
+
+<main>
+
+
+ <!--AGREGAR LA CLASE logged-out  A LA SIGUIENTE ETIQUETA--> 
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-8 offset-md-2"> 
+
+
+
+
+
+
+          <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+        
+                 <!--CAMBIAR LA IMAGEN POR UNA DE SU PREFERENCIA--> 
+                <img src="https://www.nasa.gov/sites/default/files/thumbnails/image/web_first_images_release_0.png" class="d-block w-100">
+                <div class="container">
+                  <div class="carousel-caption text-start">
+
+                    <!--CAMBIAR EL CONTENIDO TEXTUAL DE LAS DOS SIGUIENTES ETIQUETAS-->
+                    <h1>Example headline.</h1>
+                    <p>Some representative placeholder content for the first slide of the carousel.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+        
+                <!--CAMBIAR LA IMAGEN POR UNA DE SU PREFERENCIA--> 
+                <img src="https://i.pinimg.com/236x/6f/8e/77/6f8e771c35d5b05b3af5a3f6eab1208a.jpg" class="d-block w-100">
+                <div class="container">
+                  <div class="carousel-caption">
+
+                    <!--CAMBIAR EL CONTENIDO TEXTUAL DE LAS DOS SIGUIENTES ETIQUETAS-->
+                    <h1>PRIMERO.</h1>
+                    <p>Some representative placeholder content for the second slide of the carousel.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+        
+                <!--CAMBIAR LA IMAGEN POR UNA DE SU PREFERENCIA--> 
+                <img src="https://i.pinimg.com/236x/6f/8e/77/6f8e771c35d5b05b3af5a3f6eab1208a.jpg" class="d-block w-100">
+                <div class="container">
+                  <div class="carousel-caption text-end">
+
+
+                    <!--CAMBIAR EL CONTENIDO TEXTUAL DE LAS DOS SIGUIENTES ETIQUETAS-->
+                    <h1>One more for good measure.</h1>
+                    <p>Some representative placeholder content for the third slide of this carousel.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+<br>
+<br>
+
+
+  <!--AGREGAR LA CLASE logged-in a la siguiente etiqueta-->
+  <div class="container marketing text-center ">
+
+    <div class="row">
+      <div class="col-lg-4">
+
+        <!--CAMBIAR LA IMAGEN POR UNA DE SU PREFERENCIA--> 
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://i.pinimg.com/736x/87/2b/46/872b463134db6ed9bb62c59dc2191a2e.jpg"  aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">        
+
+        <!-- CAMBIAR EL TITULO Y EL PARRAFO DE ESTE COTENIDO-->
+        <h2 class="fw-normal">Heading</h2>
+        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+        
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+
+
+       <!--CAMBIAR LA IMAGEN POR UNA DE SU PREFERENCIA--> 
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://i.pinimg.com/736x/87/2b/46/872b463134db6ed9bb62c59dc2191a2e.jpg"  aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+        
+        
+        <!-- CAMBIAR EL TITULO Y EL PARRAFO DE ESTE COTENIDO-->
+        <h2 class="fw-normal">Heading</h2>
+        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+     
+     
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+
+       <!--CAMBIAR LA IMAGEN POR UNA DE SU PREFERENCIA--> 
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://i.pinimg.com/736x/87/2b/46/872b463134db6ed9bb62c59dc2191a2e.jpg"  aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">        
+        
+        
+        <!-- CAMBIAR EL TITULO Y EL PARRAFO DE ESTE COTENIDO-->
+        <h2 class="fw-normal">Heading</h2>
+        <p>And lastly this, the third column of representative placeholder content.</p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+    <hr class="featurette-divider">
+
+  </div>
+
+
+      <!-- FOOTER -->
+      <footer class="container">
+
+        <!--CAMBIAR EL IDIOMA DE ESTE TEXTO--> 
+        <p class="float-end"><a href="#">Back to top</a></p>
+
+       <!--CAMBIAR EL CONTENIDO TEXTUAL DEL PIÉ DE PÁGINA--> 
+        <p>&copy; 2017–2022 Company, Inc.</p>
+      </footer>
+</main>
+
+
+     <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Toastify js -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="./main.js" type="module"></script>
+     
+</body>
+</html>
